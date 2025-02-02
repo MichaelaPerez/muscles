@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Run Python Script</title>
+    </head>
+
+    <body>
+        <form action=""> 
+            <select name="table" onchange="showTable(this.value)">
+                <option value="">Select...</option>
+                <option value="MUSCLE">MUSCLE</option>
+                <option value="MUSCLE_GROUP">GROUP</option>
+                <option value="MUSCLE_LOCATION">LOCATION</option>
+                <option value="EXERCISE">EXERCISE</option>
+            </select>
+        </form>
+        <br>
+        <div id="my-content">Info will be loaded here...</div>
+
+        <script>
+            function showTable(str) {
+                var xhttp = new XMLHttpRequest();
+                console.log("Event handler called")  
+                if (str == "") {
+                    document.getElementById("my-content").innerHTML = "";
+                    return;
+                }
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("my-content").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "gettable.php?q="+str, true);
+                xhttp.send();
+            }
+        </script>
+    </body>
+</html>
