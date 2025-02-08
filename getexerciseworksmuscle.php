@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 }
 
 // Create SQL statement and pull result from database
-$sql = "SELECT * FROM " . $q;
+$sql = "SELECT m.mName as 'Muscle', ewm.intensity as 'Intensity' FROM EXERCISE_WORKS_MUSCLE ewm INNER JOIN MUSCLE m ON m.mid = ewm.mid INNER JOIN EXERCISE e ON e.eid = ewm.eid WHERE e.eName='" . $q . "'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

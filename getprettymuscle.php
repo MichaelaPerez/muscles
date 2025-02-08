@@ -6,8 +6,6 @@ $username = $env["MYSQL_READONLY_USER"];
 $password = $env["MYSQL_READONLY_PASS"];
 $dbname = $env["MYSQL_DB"];
 
-$q = $_GET['q'];
-
 // Create and check connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
@@ -15,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Create SQL statement and pull result from database
-$sql = "SELECT * FROM " . $q;
+$sql = "SELECT m.mid as '', m.mName as 'Muscle', ml.lName as 'Location', mg.gName as 'Group' FROM MUSCLE m LEFT JOIN MUSCLE_GROUP mg ON m.gid = mg.gid LEFT JOIN MUSCLE_LOCATION ml ON m.lid = ml.lid";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

@@ -29,14 +29,17 @@ CREATE TABLE IF NOT EXISTS EXERCISE (
 CREATE TABLE IF NOT EXISTS EXERCISE_WORKS_MUSCLE (
   eid       	INT, 
   mid			INT,
-  intensity		INT				DEFAULT 0,
+  intensity		INT,
   PRIMARY KEY (eid, mid),
   FOREIGN KEY (eid) REFERENCES EXERCISE(eid),
   FOREIGN KEY (mid) REFERENCES MUSCLE(mid),
-  CHECK (intensity>=0),
+  CHECK (intensity>0),
   CHECK (intensity<=3)
 );
 
 SHOW TABLES;
+CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
+GRANT SELECT ON muscles.EXERCISE_WORKS_MUSCLE TO 'username'@'localhost';
+
 DROP TABLE IF EXISTS MUSCLE;
 ALTER TABLE MUSCLE_LOCATION RENAME COLUMN mname to lName;

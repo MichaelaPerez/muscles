@@ -10,7 +10,7 @@
     <body>
         <form action=""> 
             <select name="table" onchange="showTable(this.value)">
-                <option value="">Select...</option>
+                <option value="">Select database table...</option>
                 <option value="MUSCLE">MUSCLE</option>
                 <option value="MUSCLE_GROUP">GROUP</option>
                 <option value="MUSCLE_LOCATION">LOCATION</option>
@@ -18,12 +18,21 @@
             </select>
         </form>
         <br>
-        <div id="my-content">Info will be loaded here...</div>
+        <button type="button" onclick="showPrettyMuscleTable()">Show Pretty Muscle Table</button>
+        <br> <br>
+        <form action=""> 
+            <select name="table" id="exercise-select" onchange="showExerciseWorksMuscle(this.value)">
+                <option value="">Select exercise...</option>
+            </select>
+        </form>
+        <br> <br>
+        <div id="my-content"></div>
+        <div id="my-content-2"></div>
 
         <script>
             function showTable(str) {
                 var xhttp = new XMLHttpRequest();
-                console.log("Event handler called")  
+                console.log("Event handler called (t)")  
                 if (str == "") {
                     document.getElementById("my-content").innerHTML = "";
                     return;
@@ -34,6 +43,50 @@
                     }
                 };
                 xhttp.open("GET", "gettable.php?q="+str, true);
+                xhttp.send();
+            }
+            function showPrettyMuscleTable() {
+                var xhttp = new XMLHttpRequest();
+                console.log("Event handler called (pmt)")  
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("my-content").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "getprettymuscle.php", true);
+                xhttp.send();
+            }
+            function showExerciseWorksMuscle(str) {
+                var xhttp = new XMLHttpRequest();
+                console.log("Event handler called (ewm)")  
+                if (str == "") {
+                    document.getElementById("my-content").innerHTML = "";
+                    return;
+                }
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("my-content").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "getexerciseworksmuscle.php?q="+str, true);
+                xhttp.send();
+            }
+            window.onload = function getExercises() {
+                var xhttp = new XMLHttpRequest();
+                console.log("Event handler called (get e)")  
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        exercises = JSON.parse(this.responseText);
+                        for(e in exercises) {
+                            console.log(e);
+                            var opt = document.createElement('option');
+                            opt.value = exercises[e];
+                            opt.innerHTML = exercises[e];
+                            document.getElementById("exercise-select").appendChild(opt);
+                        }
+                    }
+                };
+                xhttp.open("GET", "getexercise.php?", true);
                 xhttp.send();
             }
         </script>
