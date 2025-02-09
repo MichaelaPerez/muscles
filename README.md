@@ -5,12 +5,12 @@
 Update .env file with correct SQL username/password and host as appropriate
 Ensure python3 and dotenv () are installed
 
-# index.html AND gettable.php
+# Run locally
 Run php -S localhost:9001 from this directory
 Open localhost:9001 in browser
 
 
-# Docker
+# Docker - Run server
 ## Build container
 docker build -t muscles-php .
 ## Stop existing containers from docker desktop (if applicable)

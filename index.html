@@ -5,29 +5,67 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Run Python Script</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     </head>
 
     <body>
-        <form action=""> 
-            <select name="table" onchange="showTable(this.value)">
-                <option value="">Select database table...</option>
-                <option value="MUSCLE">MUSCLE</option>
-                <option value="MUSCLE_GROUP">GROUP</option>
-                <option value="MUSCLE_LOCATION">LOCATION</option>
-                <option value="EXERCISE">EXERCISE</option>
-            </select>
-        </form>
-        <br>
-        <button type="button" onclick="showPrettyMuscleTable()">Show Pretty Muscle Table</button>
-        <br> <br>
-        <form action=""> 
-            <select name="table" id="exercise-select" onchange="showExerciseWorksMuscle(this.value)">
-                <option value="">Select exercise...</option>
-            </select>
-        </form>
-        <br> <br>
-        <div id="my-content"></div>
-        <div id="my-content-2"></div>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-5">
+              <a href="https://www.michaelaperez.org/index.html" class="navbar-brand">
+                <span class="fs-4">Michaela Perez | Home</span>
+              </a>
+        
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li class="nav-item"><a href="https://www.michaelaperez.org/MichaelaPerez_Resume.pdf" class="nav-link active" aria-current="page">Resume</a></li>
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Muscles (not implemented)</a></li>
+                        <li><a class="dropdown-item" href="#">Bee Fab Productions (not implemented)</a></li>
+                        <li><a class="dropdown-item" href="#">Poetry (not implemented)</a></li>
+                        <li><a class="dropdown-item" href="https://www.michaelaperez.org/projects-project-accessibilities.html">Project Accessibilities</a></li>
+                        <li><a class="dropdown-item" href="https://www.michaelaperez.org/projects-additive-manufactured-heat-exchangers.html">Heat Exchangers</a></li>
+                        <li><a class="dropdown-item" href="https://www.michaelaperez.org/projects-dental-restoratives.html">Dental Restoratives</a></li>
+                      </ul>
+                    </li>
+              </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+            <h1 class="mt-4 mb-3">Muscles</h1>
+
+            <div class="row align-items-start text-center">
+              <div class="col">
+                <form action=""> 
+                    <select class="form-select" name="table" onchange="showTable(this.value)">
+                        <option value="">Select database table...</option>
+                        <option value="MUSCLE">MUSCLE</option>
+                        <option value="MUSCLE_GROUP">GROUP</option>
+                        <option value="MUSCLE_LOCATION">LOCATION</option>
+                        <option value="EXERCISE">EXERCISE</option>
+                    </select>
+                </form>
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-lg btn-secondary btn-block" onclick="showPrettyMuscleTable()">Show Muscle Table</button>
+              </div>
+              <div class="col">
+                <form action=""> 
+                    <select class="form-select" name="table" id="exercise-select" onchange="showExerciseWorksMuscle(this.value)">
+                        <option value="">Select exercise...</option>
+                    </select>
+                </form>
+              </div>
+            </div>
+        </div>
+
+        <div class="container" id="muscle-display"></div>
+        <div class="container" id="exercise-display"></div>
+        <div class="container text-center" id="my-content"></div>
 
         <script>
             function showTable(str) {
@@ -78,7 +116,6 @@
                     if (this.readyState == 4 && this.status == 200) {
                         exercises = JSON.parse(this.responseText);
                         for(e in exercises) {
-                            console.log(e);
                             var opt = document.createElement('option');
                             opt.value = exercises[e];
                             opt.innerHTML = exercises[e];
@@ -90,5 +127,11 @@
                 xhttp.send();
             }
         </script>
+
+        <!-- <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; Michaela Perez 2025</p>
+            </div>
+        </footer> -->
     </body>
 </html>

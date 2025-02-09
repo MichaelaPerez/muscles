@@ -18,14 +18,15 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
   // Start table
-  echo "<table>\n" ;
-  echo "<tr>\n" ;
+  echo "<table class=\"table table-striped\">\n" ;
+  echo "<thead> <tr>\n" ;
 
   // Output header
   $columns = $result->fetch_fields();
   for($c=0; $c<$result->field_count; $c=$c+1) {
-    echo "<th>" . $columns[$c]->name . "</th>\n";
+    echo "<th scope=\"col\">" . $columns[$c]->name . "</th>\n";
   }
+  echo "</thead>";
 
   // Output Rows
   while($row = $result->fetch_assoc()) {
