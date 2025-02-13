@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile-db
+    environment:
+      MYSQL_ROOT_PASSWORD: "e2w&N%e3"
+    ports:
+      - 9306:3306
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 9010:80

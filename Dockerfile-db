@@ -1,0 +1,7 @@
+FROM mysql:8.0.41
+
+
+COPY ./mysql_dumped/dumped.sql /docker-entrypoint-initdb.d/
+# COPY ./mysql/muscles-ddl.sql /docker-entrypoint-initdb.d/
+# COPY ./mysql/muscles-dml.sql /docker-entrypoint-initdb.d/
+
